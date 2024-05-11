@@ -15,10 +15,10 @@ import lombok.NoArgsConstructor;
 public class Kategori {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // id için otomatik artan bir HB sequence oluşturur.
-    Long id;
+    private Long id;
     @Column(name = "Kategori_Adi")
-    String kategoriAdi;
+    private String kategoriAdi;
     @Column(name = "Ust_Kategori_Id")
-    Long ustKategoriId;
+    private Long ustKategoriId;
 
 }

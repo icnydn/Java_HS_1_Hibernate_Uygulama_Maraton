@@ -6,6 +6,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
+import java.util.Locale;
+
 @Data // get, set, toString
 @AllArgsConstructor // parametreli constructorların tümü
 @NoArgsConstructor // default constructorlar
@@ -15,17 +20,17 @@ import lombok.NoArgsConstructor;
 public class Urun {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // id için otomatik artan bir HB sequence oluşturur.
-    Long id;
+    private Long id;
     @Column(name = "Kategori_Id")
-    Long kategoriId;
+    private Long kategoriId;
     @Column(name = "Urun_Adi")
-    String urunAdi;
+    private String urunAdi;
     @Column(name = "Aciklama")
-    String aciklama;
+    private String aciklama;
     @Column(name = "Fiyat")
-    Double fiyat;
+    private Double fiyat;
     @Column(name = "Stok")
-    Integer stok;
+    private Integer stok;
 
     public Urun(String urunAdi, Double fiyat, Integer stok) {
         this.urunAdi = urunAdi;
@@ -33,11 +38,17 @@ public class Urun {
         this.stok = stok;
     }
 
+    public String formatliFiyat() {
+        // Fiyatı biçimlendirme için NumberFormat kullanalım
+        NumberFormat formatter = new DecimalFormat("#,###.##", new DecimalFormatSymbols(new Locale("tr", "TR")));
+        return formatter.format(fiyat) + " ₺"; // Türk Lirası sembolü ekleyelim
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Urun{");
         sb.append("urunAdi='").append(urunAdi).append('\'');
-        sb.append(", fiyat=").append(fiyat);
+        sb.append(", fiyat=").append(formatliFiyat());
         sb.append(", stok=").append(stok);
         sb.append('}');
         return sb.toString();
