@@ -32,25 +32,25 @@ public class Urun {
     @Column(name = "Stok")
     private Integer stok;
 
-    public Urun(String urunAdi, Double fiyat, Integer stok) {
-        this.urunAdi = urunAdi;
-        this.fiyat = fiyat;
-        this.stok = stok;
-    }
+//    public Urun(String urunAdi, Double fiyat, Integer stok) {
+//        this.urunAdi = urunAdi;
+//        this.fiyat = fiyat;
+//        this.stok = stok;
+//    }
 
-    public String formatliFiyat() {
-        // Fiyatı biçimlendirme için NumberFormat kullanalım
-        NumberFormat formatter = new DecimalFormat("#,###.##", new DecimalFormatSymbols(new Locale("tr", "TR")));
-        return formatter.format(fiyat) + " ₺"; // Türk Lirası sembolü ekleyelim
-    }
+//    public String formatliFiyat() {
+//        // Fiyatı biçimlendirme için NumberFormat kullanalım
+//        NumberFormat formatter = new DecimalFormat("#,###.##", new DecimalFormatSymbols(new Locale("tr", "TR")));
+//        return formatter.format(fiyat) + " ₺"; // Türk Lirası sembolü ekleyelim
+//    }
 
-    @Override
-    public String toString() {
-        final StringBuffer sb = new StringBuffer("Urun{");
-        sb.append("urunAdi='").append(urunAdi).append('\'');
-        sb.append(", fiyat=").append(formatliFiyat());
-        sb.append(", stok=").append(stok);
-        sb.append('}');
-        return sb.toString();
-    }
+//    @Override
+//    public String toString() {
+//        final StringBuffer sb = new StringBuffer("Urun{");
+//        sb.append("urunAdi='").append(urunAdi).append('\'');
+//        sb.append(", fiyat=").append(formatliFiyat());
+//        sb.append(", stok=").append(stok);
+//        sb.append('}');
+//        return sb.toString();
+//    }
 }

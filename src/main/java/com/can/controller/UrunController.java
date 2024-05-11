@@ -1,15 +1,22 @@
 package com.can.controller;
 
 import com.can.entity.Urun;
+import com.can.service.KategoriService;
 import com.can.service.UrunService;
+import com.can.utility.ViewUrunArama;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class UrunController {
     private final UrunService urunService;
+    private final KategoriService kategoriService;
 
     public UrunController() {
         urunService = new UrunService();
+        kategoriService = new KategoriService();
     }
 
     public void urunKaydet() {
@@ -45,10 +52,20 @@ public class UrunController {
                 """);
         System.out.print("Aramak istediğiniz ürün adını giriniz...: ");
         String arananUrun = new Scanner(System.in).nextLine();
-        urunService.findAllByGivenValue(arananUrun)
+        List<Urun> uruns = urunService.findAllByGivenValue(arananUrun)
                 .stream().limit(10)
-                .forEach(System.out::println);
-
+                .collect(Collectors.toList());
+        List<ViewUrunArama> vwUrunArama = new ArrayList<>();
+        for (Urun urun : uruns) {
+            ViewUrunArama vw = ViewUrunArama.builder()
+                    .kategori(kategoriService.findById(urun.getKategoriId()).getKategoriAdi())
+                    .urunAdi(urun.getUrunAdi())
+                    .fiyat(urunService.formatliFiyat(urun.getFiyat()))
+                    .stok(urun.getStok())
+                    .build();
+            vwUrunArama.add(vw);
+        }
+        System.out.println(vwUrunArama);
     }
 
     public void urunListesi() {

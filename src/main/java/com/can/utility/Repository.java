@@ -143,11 +143,12 @@ public class Repository<T, ID> implements ICrud<T, ID> {
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = (CriteriaQuery<T>) criteriaBuilder.createQuery(t.getClass());
         Root<T> root = (Root<T>) criteriaQuery.from(t.getClass());
-        criteriaQuery.multiselect(
-                root.get("urunAdi"),
-                root.get("fiyat"),
-                root.get("stok")
-        ); // select * from
+        criteriaQuery.select(root);
+//        criteriaQuery.multiselect(
+//                root.get("urunAdi"),
+//                root.get("fiyat"),
+//                root.get("stok")
+//       ); // select * from
         criteriaQuery.where(criteriaBuilder.like(root.get("urunAdi"), "%" + value + "%"));
         return em.createQuery(criteriaQuery).getResultList();
     }

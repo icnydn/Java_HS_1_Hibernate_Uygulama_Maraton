@@ -19,4 +19,8 @@ public class KategoriService {
     public List<Kategori> findAll() {
         return kategoriRepository.findAll();
     }
+
+    public Kategori findById(Long id) {
+        return kategoriRepository.findById(id).get();
+    }
 }
